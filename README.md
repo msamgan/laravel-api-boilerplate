@@ -11,7 +11,7 @@ A robust, modular Laravel 12 API boilerplate designed for scalability and modern
 - **Activity Logging:** Spatie Laravel Activitylog
 - **Code Quality:** Laravel Pint, Rector
 - **Deployment:** Deployer
-- **Modular Structure:** Laravel Modular
+- **Modular Structure:** [Laravel Modular](https://github.com/saeedvir/laravel-modular) (by saeedvir)
 
 ## ✨ Key Features
 
@@ -75,6 +75,41 @@ The boilerplate includes a custom command to generate API documentation.
   ```bash
   php artisan app:generate-api-documentation --UI
   ```
+
+## 📦 Modular Management
+
+The project uses `saeedvir/laravel-modular` to manage its modular structure. This allows you to encapsulate features into self-contained modules located in the `modules/` directory.
+
+### 🛠 Modular Commands
+
+You can use the following Artisan commands to manage your modules:
+
+- **Create a new module:**
+  ```bash
+  php artisan module:make {name}
+  ```
+- **List all modules:**
+  ```bash
+  php artisan module:list
+  ```
+- **Create module-specific components:**
+  ```bash
+  php artisan module:make-controller {module} {name}
+  php artisan module:make-model {module} {name}
+  php artisan module:make-migration {module} {name}
+  php artisan module:make-request {module} {name}
+  ```
+- **Manage module status:**
+  ```bash
+  php artisan module:enable {module}
+  php artisan module:disable {module}
+  ```
+
+### 🧩 How it Works
+
+1. **Autoloading:** Each module has its own `composer.json` file. The root `composer.json` uses the `wikimedia/composer-merge-plugin` to automatically merge and load these module-level dependencies and namespaces.
+2. **Structure:** When a module is created, it follows the standard Laravel directory structure within the `modules/{ModuleName}` directory (e.g., `src/Http/Controllers`, `src/Models`, etc.).
+3. **Registration:** Modules are automatically discovered and registered by the package, allowing you to use routes, migrations, and providers defined within the module.
 
 ## 🧹 Code Quality
 
